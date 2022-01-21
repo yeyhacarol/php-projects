@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pr-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario</title>
+
+    <style>
+        textarea {
+            resize: none;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- method="GET" -> permite retirar os dados dos formulários e disponibilzar na url da página  -->
+    <!-- method="POST" -> permite retirar os dados dos formulários e disponibilzar em variáveis locais  -->
+    <!-- action="" -> utilizada para especificar em qual arquivo ou página será disponibilizado do formulário -->
+    <form name="frmCadastro" , method="GET" , action="formularios.html">
+        Nome: <input type="text" name="txtNome" size="50" maxlength="30"><br><br>
+        Cidade:
+        <!-- select="" -> para criar um comboBox 
+             option="" -> para adicionarmos itens na lista
+             value="" -> identificador do item para o back-end (obrigatório!) -->
+        <select name="sltCidade">
+            <!-- a opção selected define esse item como o primeiro selecionado da lista -->
+            <option value="" selected>Selecione um item</option>
+            <option value="itapevi">Itapevi</option>
+            <option value="jandira">Jandira</option>
+            <option value="barueri" selected>Barueri</option>
+            <option value="carapicuiba">Carapicuíba</option>
+            <option value="osasco">Osasco</option>
+        </select>
+        Sexo:
+        <!-- para que o type="radio" permita a escolha única é necessário que o name="" possua o mesmo valor em todos os elementos. 
+                É possível utilizarmos a opção checked para que o item esteja sempre selecionado inicialmente -->
+        <input type="radio" name="rdoSexo" value="f">Feminino
+        <input type="radio" name="rdoSexo" value="m">Masculino
+        <br><br>
+        Idioma:
+        <input type="checkbox" name="chkPortugues" value="pt" checked>Português
+        <input type="checkbox" name="chkIngles" value="en">Inglês
+        <input type="checkbox" name="chkEspanhol" value="es">Espanhol
+        <br><br>
+        <p>Observação:</p>
+        <textarea name="txtObs" cols="30" rows="5"></textarea>
+        <div><input type="submit" name="btnSalvar" value="Salvar"></div>
+    </form>
+</body>
+
+</html>
