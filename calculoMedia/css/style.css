@@ -5,7 +5,6 @@
     margin-right: auto;
     border: solid 1px #000000;
     text-align: center;
-
 }
 
 #titulo{
@@ -60,6 +59,14 @@ input{
 #botaoReset a{
     color: #ffffff;
     text-decoration: none;
+}
+
+.msgErro {
+    font-family: verdana;
+    font-size: 1em;
+    color: red;
+    font-weight: bold;
+    text-align: center;
 }
 
 
