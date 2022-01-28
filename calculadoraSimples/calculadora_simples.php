@@ -1,18 +1,31 @@
-<?php 
-	$valor1 = (double) 0;
-	$valor2 = (double) 0;
-	$operadores = $_POST['rdocalc'];
-	$soma = (double) 0;
-	$operadores == $soma;
+<?php
+$valor1 = (float) 0;
+$valor2 = (float) 0;
 
-	if (isset($_POST['btncalc'])) {
-		if (isset($_POST[$operadores])) {
-			$valor1 = $_POST['txtn1'];
-			$valor2 = $_POST['txtn2'];
-			$soma = $valor1 + $valor2;
+$resultado = (float) 0;
+
+if (isset($_POST['btncalc'])) {
+	$operadores = $_POST['rdocalc'];
+
+	$valor1 = $_POST['txtn1'];
+	$valor2 = $_POST['txtn2'];
+
+	if ($_POST['txtn1'] == "" || $_POST['txtn2'] == "") {
+		echo ('<p class="msgErro">Obrigatório preencher todos os campos!</p>');
+	} else if (!is_numeric($valor1) || !is_string($valor2)) {
+		echo ('<p class="msgErro"> Caracteres inválidos! </p>');
+	} else {
+		if ($operadores == 'somar') {
+			$resultado = $valor1 + $valor2;
+		} else if ($operadores == 'subtrair') {
+			$resultado = $valor1 - $valor2;
+		} else if ($operadores == 'multiplicar') {
+			$resultado = $valor1 * $valor2;
+		} else {
+			$resultado = $valor1 / $valor2;
 		}
-		
 	}
+}
 ?>
 
 <html>
@@ -42,7 +55,7 @@
 					<input type="submit" name="btncalc" value="Calcular">
 				</div>
 				<div id="resultado">
-					Resultado: <?php echo($soma) ?>;
+					Resultado: <?php echo ($resultado) ?>;
 				</div>
 
 			</form>
