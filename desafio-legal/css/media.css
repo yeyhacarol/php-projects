@@ -1,0 +1,123 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+form, header {
+    font-family: 'Roboto', sans-serif;
+    font-weight: lighter;
+    font-size: 24px;
+    line-height: 28px;
+}
+
+img {
+    padding: 10px 100px;
+}
+
+.menu {
+    width: 100vw;
+    height: 100px;
+
+    background-color: #E0DBF4; 
+}
+
+ul {
+    display: flex;
+
+    float: right;
+    
+    margin-top: 36px;
+    margin-right: 100px;
+    list-style: none;
+    gap: 25px;
+}
+
+li > a {
+    color: #000;
+    
+    text-decoration: none;
+}
+
+.conteiner {
+    height: calc(100vh - 100px);
+
+    background-color: white;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.media {
+    width: 50vw;
+    height: 50vh;
+
+    background-color: #EFEFEF;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.titulo {
+    width: 50vw;
+    height: 80px;
+
+    background-color: #CCCCDD;
+
+    padding-top: 26px;
+    margin-top: -120px;
+
+    text-align: center;
+}
+
+.notas {
+    display: flex;
+    flex-direction: column;
+    margin-top: 70px;
+    gap: 25px;
+}
+
+input {
+    width: 230px;
+    height: 30px;
+
+    border: none;
+
+    background-color: #C4C4C4;
+}
+
+.botoes {
+    display: flex;
+
+    gap: 70px;
+}
+
+.calcular, .novoCalculo {
+    width: 150px;
+    height: 40px;
+
+    font-size: 20px;
+
+    background-color: #C4C4C4;
+}
+
+.novoCalculo {
+    text-align: center;
+    
+    padding-top: 5px;  
+}
+
+.novoCalculo > a {
+    color: #000;
+    text-decoration: none;
+    text-align: center;
+}
+
+#resultado {
+    margin-top: 60px;
+}
+

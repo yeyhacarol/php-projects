@@ -11,7 +11,7 @@
         if($_POST['multiplicador'] == "" || $_POST['multiplicando'] == ""){
             echo('<script> alert("Algum campo está vazio!") </script>');
         } elseif (!is_numeric($multiplicador) || !is_numeric($multiplicando)) {
-            echo('<script> alert("Caractere inválido!" </script>');
+            echo('<script> alert("Caractere inválido!") </script>');
         } elseif ($_POST['multiplicador'] == 0) {
             echo('<script> alert("Impossível multiplicar 0") </script>');
         } else {
