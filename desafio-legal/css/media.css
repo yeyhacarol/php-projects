@@ -40,7 +40,7 @@ li > a {
 }
 
 .conteiner {
-    height: calc(100vh - 100px);
+    height: calc(98vh - 100px);
 
     background-color: white;
 
@@ -84,6 +84,8 @@ li > a {
 input {
     width: 230px;
     height: 30px;
+
+    font-size: 20px;
 
     border: none;
 

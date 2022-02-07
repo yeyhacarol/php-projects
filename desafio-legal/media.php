@@ -5,14 +5,14 @@ $nota3 = (float) 0;
 $nota4 = (float) 0;
 $media = (float) 0;
 
-if (isset($_POST['btncalc'])) {
+if (isset($_POST['btnCalcular'])) {
 
-    $nota1 = $_POST['txtn1'];
-    $nota2 = $_POST['txtn2'];
-    $nota3 = $_POST['txtn3'];
-    $nota4 = $_POST['txtn4'];
+    $nota1 = $_POST['txtNota1'];
+    $nota2 = $_POST['txtNota2'];
+    $nota3 = $_POST['txtNota3'];
+    $nota4 = $_POST['txtNota4'];
 
-    if ($_POST['txtn1'] == "" || $_POST['txtn2'] == "" || $_POST['txtn3'] == "" || $_POST['txtn4'] == "") {
+    if ($_POST['txtNota1'] == "" || $_POST['txtNota2'] == "" || $_POST['txtNota3'] == "" || $_POST['txtNota4'] == "") {
         echo ('<p class="msgErro"> Obrigatório preencher todos os campos!</p>');
     } else if (!is_numeric($nota1) || !is_numeric($nota2) || !is_numeric($nota3) || !is_numeric($nota4)) {
         echo ('<p class="msgErro"> Algum campo com caracteres inválidos!</p>');
@@ -72,13 +72,14 @@ if (isset($_POST['btncalc'])) {
                             </div>
                         </div>
                     </div>
+                    <footer id="resultado">
+                        A média é: <?php echo ($media) ?>
+                    </footer>
                 </div>
             </div>
         </form>
     </div>
-    <footer id="resultado">
-        A média é: <?php echo ($media) ?>;
-    </footer>
+    
 
 </body>
 
