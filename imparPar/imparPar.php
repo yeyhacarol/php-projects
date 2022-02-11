@@ -1,11 +1,26 @@
 <<?php
 
+<<<<<<< HEAD
 $num1Acumuladora = null;
 $num2Acumuladora = null;
 $impares = null;
 $pares = null;
 $numInicial = null;
 $numFinal = null;
+=======
+$sltUm = range(0, 500);
+$sltDois = range(100, 1000);
+$inicial = (int) 0;
+$final = (int) 0;
+
+if (isset($_POST['btnCalcular'])) {
+
+    $inicial = $_POST[$valueItem];
+
+    
+
+}
+>>>>>>> dd1fc5ee5e866e735130e07f536896a67928ca80
 
 for ($i = (int)0; $i <= 500; $i++) {
 
@@ -39,7 +54,11 @@ if (isset($_POST['btnCalcular'])) {
 
 
 <!DOCTYPE html>
+<<<<<<< HEAD
 <html lang="en">
+=======
+<html lang="pt-BR">
+>>>>>>> dd1fc5ee5e866e735130e07f536896a67928ca80
 
 <head>
   <meta charset="UTF-8" />
@@ -48,6 +67,7 @@ if (isset($_POST['btnCalcular'])) {
 </head>
 
 <body>
+<<<<<<< HEAD
   <div id="form">
     <form name="frmTabuada" method="post" action="imparPar.php">
       <div>
@@ -61,6 +81,24 @@ if (isset($_POST['btnCalcular'])) {
         </select>
       </div>
       <button name="btnCalcular">Calcular</button>
+=======
+    <form name="frmImparPar" method="$_POST" action="imparPar.php">
+        <select name="sltUm">
+            <?php
+            foreach ($sltUm as $keyItem => $valueItem) {
+                echo "<option> $valueItem </option>";
+            }
+            ?>
+        </select>
+        <select name="sltDois">
+            <?php
+                foreach ($sltDois as $keyItem => $valueItem) {
+                    echo "<option> $valueItem </option>";
+                }
+            ?>
+        </select>
+        <input type="submit" name="btnCalcular" value="Calcular"></input>
+>>>>>>> dd1fc5ee5e866e735130e07f536896a67928ca80
     </form>
     <div class="resultados">
       <div class="impar">
