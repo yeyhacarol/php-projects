@@ -9,7 +9,7 @@
     align-items: center;
 }
 
-.media {
+.calculadora {
     width: 50vw;
 
     background-color: #EFEFEF;
@@ -31,14 +31,21 @@
     text-align: center;
 }
 
-.notas {
+.valor1, .valor2 {
     display: flex;
-    flex-direction: column;
-    margin-top: 45px;
-    gap: 25px;
+    flex-direction: row;
+    margin-top: 35px;
+    gap: 15px;
     align-items: center;
 }
 
-#resultado {  
+.opcoes {
+    display: flex;
+
+    padding: 50px;
+    gap: 15px;
+}
+
+#resultado {
     padding: 40px;
 }
