@@ -56,7 +56,7 @@ function tabuada($multiplicador, $multiplicando) {
 
     for ($i = 0; $i <= $multiplicando; $i++) {
         $resultado = $multiplicador * $i; 
-        $resultadoRefatorado .= ($multiplicador . "x" . $i . "=" . $resultado . '<br>'); 
+        $resultadoRefatorado .= ($multiplicador . " x " . $i . " = " . $resultado . '<br>'); 
     }
 
     return $resultadoRefatorado;

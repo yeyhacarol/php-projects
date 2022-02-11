@@ -47,7 +47,7 @@ if (isset($_POST['btnCalcular'])) {
             <li><a href="media.php">Média</a></li>
             <li><a href="calculadora_simples.php">Calculadora simples</a></li>
             <li><a href="tabuada.php">Tabuada</a></li>
-            <li>Pares e ímpares</li>
+            <li><a href="imPar.php">Pares e ímpares</a></li>
         </ul>
     </header>
     <form name="frmTabuada" method="post" action="tabuada.php">
@@ -68,7 +68,7 @@ if (isset($_POST['btnCalcular'])) {
                     <input class="calcular" type="submit" name="btnCalcular" value="Calcular">
                 </div>
                 <footer id="resultado">
-                <?= $resultado ?>
+                    <div class="resultado"><?= $resultado ?></div>
                 </footer>
             </div>
         </div>

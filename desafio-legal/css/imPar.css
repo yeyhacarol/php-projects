@@ -1,15 +1,13 @@
 .conteiner {
     height: calc(98vh - 100px);
 
-    background-color: white;
-
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.tabuada {
+.imPares {
     width: 50vw;
 
     background-color: #EFEFEF;
@@ -18,6 +16,14 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+.select {
+    width: 140px;
+    height: 30px;
+    font-size: 1.2rem;
+    border: none;
+    background-color: #C4C4C4;
 }
 
 .titulo {
@@ -31,33 +37,30 @@
     text-align: center;
 }
 
-.valor1, .valor2 {
+.inicial {
+    margin-top: 40px;
+    margin-bottom: 30px;
+}
+
+.botao {
+    margin-top: 40px;
+}
+
+.valores {
+    width: 25vw;
+    margin-right: auto;
+    padding-left: 30px;
+}
+
+.pares, .impares {
+    width: 150px;
+    background-color: #CCCCDD;
+}
+
+.resultados {
     display: flex;
-    flex-direction: row;
-    margin-top: 35px;
-    gap: 15px;
-    align-items: center;
-}
-
-.valor2 {
-    gap: 20px;
-}
-
-.botoes {
-    display: flex;
-
-    padding: 50px;
-
-    gap: 70px;
-}
-
-#resultado {
-    width: 50vw;
-    height: 15vh;
-    overflow: auto;
-    background-color: #C4C4C4;
-}
-
-.resultado {
+    gap: 30px;
     text-align: center;
+    position: absolute;
 }
+
