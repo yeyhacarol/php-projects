@@ -21,3 +21,44 @@ header {
 
     background-color: indigo;
 }
+
+#produtos {
+    width: 100%;
+    min-height: 1000px;
+    height: auto;
+
+    overflow: hidden;
+
+    background-color: aquamarine;
+}
+
+#contatos {
+    width: 100%;
+    height: 100px;
+
+    background-color: lightgreen;
+}
+
+.conteudo {
+    width: 1400px;
+    height: inherit;
+
+    margin: auto;
+
+    background-color: lightcoral;
+}
+
+#contatos .conteudo {
+    background-color: tomato;
+}
+
+.card-produto {
+    width: 350px;
+    height: 450px;
+
+    float: left;
+    margin-right: 90px;
+    margin-bottom: 20px;
+
+    background-color: steelblue;
+}
