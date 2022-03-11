@@ -3,6 +3,8 @@
     <head>
         <meta charset="UTF-8">
         <title> Cadastro </title>
+        <!-- to change the head icon -->
+        <link rel="icon" type="image/x-icon" href="">
         <link rel="stylesheet" type="text/css" href="css/style.css">
     </head>
     <body>

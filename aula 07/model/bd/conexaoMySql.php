@@ -8,10 +8,11 @@ const USER = 'root';
 const PASSWORD = 'bcd127';
 const DATABASE = 'dbcontatos';
 
+/* testando se a conexão foi realizada!
 $resultado = conexaoMySql();
 echo('<pre>');
 print_r($resultado);
-echo('</pre>');
+echo('</pre>'); */
 
 // abrir conexão com o banco de dados MySql
 function conexaoMySql() {
