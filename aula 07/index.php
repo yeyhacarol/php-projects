@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <title> Cadastro </title>
         <!-- to change the head icon -->
-        <link rel="icon" type="image/x-icon" href="">
+        <link rel="icon" type="image/x-icon" href="https://as1.ftcdn.net/v2/jpg/01/72/22/52/1000_F_172225270_QtBzpfx2g0I78X1XZ2VxL5FgTeAGt4p9.jpg">
         <link rel="stylesheet" type="text/css" href="css/style.css">
     </head>
     <body>
@@ -81,11 +81,18 @@
                     <td class="tblColunas destaque"> Opções </td>
                 </tr>
                 
+                <?php
+                    require_once('controller/controllerContatos.php');
+                    $listContato = listarContato();
+                    foreach($listContato as $dados) {
+
+                    
+                ?>
                
                 <tr id="tblLinhas">
-                    <td class="tblColunas registros"></td>
-                    <td class="tblColunas registros"></td>
-                    <td class="tblColunas registros"></td>
+                    <td class="tblColunas registros"><?= $dados['nome']?></td>
+                    <td class="tblColunas registros"><?= $dados['celular']?></td>
+                    <td class="tblColunas registros"><?= $dados['email']?></td>
                    
                     <td class="tblColunas registros">
                             <img src="img/edit.png" alt="Editar" title="Editar" class="editar">
@@ -93,6 +100,11 @@
                             <img src="img/search.png" alt="Visualizar" title="Visualizar" class="pesquisar">
                     </td>
                 </tr>
+                <?php 
+                
+                }
+
+                ?>
             </table>
         </div>
     </body>
