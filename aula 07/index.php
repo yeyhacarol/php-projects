@@ -82,11 +82,12 @@
                 </tr>
                 
                 <?php
+                    //import d arquivo par asoliciar a função
                     require_once('controller/controllerContatos.php');
+                    //função responsável por listar os conatatos
                     $listContato = listarContato();
+                    //foreach para percorrermos e printarmos os dados de contato um a um
                     foreach($listContato as $dados) {
-
-                    
                 ?>
                
                 <tr id="tblLinhas">
@@ -95,9 +96,12 @@
                     <td class="tblColunas registros"><?= $dados['email']?></td>
                    
                     <td class="tblColunas registros">
-                            <img src="img/edit.png" alt="Editar" title="Editar" class="editar">
+                        <img src="img/edit.png" alt="Editar" title="Editar" class="editar">
+                        <!-- href que direciona a página para este determinado caminho -->
+                        <a href="router.php?component=contatos&action=deletar&id=<?=$dados['id']?>">
                             <img src="img/trash.png" alt="Excluir" title="Excluir" class="excluir">
-                            <img src="img/search.png" alt="Visualizar" title="Visualizar" class="pesquisar">
+                        </a>
+                        <img src="img/search.png" alt="Visualizar" title="Visualizar" class="pesquisar">
                     </td>
                 </tr>
                 <?php 

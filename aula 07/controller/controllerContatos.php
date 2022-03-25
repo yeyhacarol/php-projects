@@ -1,5 +1,5 @@
 <!-- Objetivo: arquivo responsável pela manipulação de dados de contatos. Este arquivo fará a ponte entre a view e a model; 
-    autora: Carolina Silva; data de criação: 04/03/2022; última modificação: 18/03/2022; versão: 1.0 
+    autora: Carolina Silva; data de criação: 04/03/2022; última modificação: 25/03/2022; versão: 1.0 
 -->
 
 <?php
@@ -41,8 +41,25 @@
     }
 
     //função para realizar a exclusão de um contato (excluir)
-    function deletarContato() {
-        
+    function deletarContato($id) {
+        //verificando se o id é válido; diferente de zero, existente e númerico respectivamente
+        if($id != 0 && !empty($id) && is_numeric($id)) {
+            //import da model
+            require_once('model/bd/contato.php');
+
+            //chamando a função da model e verificando se o retorno foi true/false e exibindo mensagens em caso de erro
+            if(deleteContato($id)) {
+                return true;
+            } else {
+                return array('idErro'  => 3,
+                             'message' => 'O banco não conseguiu deletar registro.');
+            }
+        } else {
+            return array('idErro'  => 4,
+                         'message' => 'Não foi possível excluir registro. ID inválido ou não inserido.');
+        }
+
+
     }
 
     //função para solicitar os dados da model e encaminhar a lista de contatos para a view (inserir)

@@ -1,4 +1,5 @@
-<!-- Objetivo: arquivo para criar a conexão com o banco de dados MySQL; autora: Carolina Silva; data de criação: 25/02/2022; versão: 1.0 -->
+<!-- Objetivo: arquivo para criar a conexão com o banco de dados MySQL; autora: Carolina Silva; data de criação: 25/02/2022; 
+última modificação: 25/03/2022; versão: 1.0 -->
 
 <?php
 
@@ -28,6 +29,11 @@ function conexaoMySql() {
         return false;
     }
     
+}
+
+// fechar conexão com o banco de dados MySql, passando a $conexao como argumento/parâmetro, variável existente nos outros arquivos responsável por representar o banco
+function fecharConexaoMySql($conexao)  {
+    mysqli_close($conexao);
 }
 
 ?>

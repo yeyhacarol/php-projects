@@ -7,8 +7,8 @@
 $action = (string) null;
 $component = (string) null;
 
-//inicialmente devemos identificar através de qual method é a requisição do form, nesse caso se é o method post
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+//inicialmente devemos identificar através de qual method é a requisição do form, nesse caso ambas
+if ($_SERVER['REQUEST_METHOD'] == 'POST' || $_SERVER['REQUEST_METHOD'] == 'GET') {
 
     //recebendo dados via URL para saber quem está solicitando e qual ação será realizada
     $component = strtoupper($_GET['component']);
@@ -39,7 +39,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             window.history.back(); //para que quando retorne a página anterior, os dados inseridos ainda estejam nos campos 
                         </script>");
                 }
+            } elseif ($action == 'DELETAR') {
+                //recebendo via get(url) o id do registro que deve ser excluído, atráves do link da imagem que foi acionado na index
+                $idContato = $_GET['id'];
+
+                $promessa = deletarContato($idContato);
+                if(is_bool($promessa)) {
+                    if($promessa) {
+                        echo("<script>
+                            alert('Registro excluído com sucesso!') 
+                            window.location.href = 'index.php'; 
+                        </script>"); 
+                    } 
+                } elseif (is_array($promessa)) {
+                    echo("<script>
+                            alert('".$promessa['message']."') 
+                            window.history.back(); 
+                        </script>");
+                }
             }
+
             break;
     }
 }
