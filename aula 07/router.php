@@ -1,5 +1,5 @@
 <!-- Objetivo: arquivo de rota genérico para receber todas as requisições da view(dados de um form, listagem de dados, ação de excluir ou atualizar) 
-        e enviar/receber para(da) a controller; autora: Carolina Silva; data criação: 04/03/2022; última modificação: 18/03/2022; versão: 1.0 
+        e enviar/receber para(da) a controller; autora: Carolina Silva; data criação: 04/03/2022; última modificação: 01/04/2022; versão: 1.0 
 -->
 
 <?php
@@ -42,9 +42,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' || $_SERVER['REQUEST_METHOD'] == 'GET')
             } elseif ($action == 'DELETAR') {
                 //recebendo via get(url) o id do registro que deve ser excluído, atráves do link da imagem que foi acionado na index
                 $idContato = $_GET['id'];
-
+                
+                //chamando acão de deletar da controller
                 $promessa = deletarContato($idContato);
+
                 if(is_bool($promessa)) {
+
                     if($promessa) {
                         echo("<script>
                             alert('Registro excluído com sucesso!') 
@@ -57,6 +60,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' || $_SERVER['REQUEST_METHOD'] == 'GET')
                             window.history.back(); 
                         </script>");
                 }
+            } elseif ($action == 'BUSCAR') {
+                //recendo via GET o id do contato que deve ser buscado para o editar posteriormente
+                $idContato = $_GET['id'];
+
+                //chamando a função de buscar contato da contoller
+                $dados = buscarContato($idContato);
+
+                /*habilitando função de variável de sessão, pois quando acessamos a action de buscar, a index nos leva a router e 
+                    acabamos por perder nossas variáveis por isso é necessário armazená-las no storage do navegador pra que elas sejam
+                    perdidas apenas quando o navegador for desligado. dessa maneira podemos inseri-las nas caixas de texto
+                */
+                session_start();
+
+                //variável do tipo SESSION nomeada por DADOSCONTATO que recebe a variável de DADOS que contém os dados que o banco de dados retornou para a busca do id
+                //tal variável será utilizada na index.php para colocarmos os dados no form para visualização e posteriormente edição!
+                $_SESSION['dadosContato'] = $dados;
+
+                //para que a tela de router apenas se renderize e continue sendo a mesma do form piscando apenas uma vez, quase imperceptível visualmente
+                require_once('index.php');
+
+                //caso queiramos chamar a index e realmente trocar de tela, utilizamos:
+                // header('location: index.php');
+
             }
 
             break;

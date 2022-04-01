@@ -1,3 +1,29 @@
+<?php
+
+//inicializando as variáveis como nulas para não aparecer o erro nos campos
+$nome = null;
+$telefone = null;
+$celular = null;
+$email = null;
+$obs = null;
+
+/* resgatando dados da variável de sessão para inserir nos inputs */
+
+//verificando se a variável de sessão está ativada no servidor
+if (session_status()) {
+    //valida se a variável de sessão possui conteúdo, se sim resgata os dados necessários para colocar na caixa de texto
+    if(!empty($_SESSION['dadosContato'])) {
+        $id       = $_SESSION['dadosContato']['id'];
+        $nome     = $_SESSION['dadosContato']['nome'];
+        $telefone = $_SESSION['dadosContato']['telefone'];
+        $celular  = $_SESSION['dadosContato']['celular'];
+        $email    = $_SESSION['dadosContato']['email'];
+        $obs      = $_SESSION['dadosContato']['obs'];
+    }
+}
+
+?>
+
 <!DOCTYPE>
 <html lang="pt-br">
     <head>
@@ -21,16 +47,15 @@
                             <label> Nome: </label>
                         </div>
                         <div class="cadastroEntradaDeDados">
-                            <input type="text" name="txtNome" value="" placeholder="Digite seu Nome" maxlength="100">
+                            <input type="text" name="txtNome" value="<?=$nome?>" placeholder="Digite seu Nome" maxlength="100">
                         </div>
-                    </div>
-                                     
+                    </div>           
                     <div class="campos">
                         <div class="cadastroInformacoesPessoais">
                             <label> Telefone: </label>
                         </div>
                         <div class="cadastroEntradaDeDados">
-                            <input type="tel" name="txtTelefone" value="">
+                            <input type="tel" name="txtTelefone" value="<?=$telefone?>">
                         </div>
                     </div>
                     <div class="campos">
@@ -38,7 +63,7 @@
                             <label> Celular: </label>
                         </div>
                         <div class="cadastroEntradaDeDados">
-                            <input type="tel" name="txtCelular" value="">
+                            <input type="tel" name="txtCelular" value="<?=$celular?>">
                         </div>
                     </div>
                    
@@ -47,7 +72,7 @@
                             <label> Email: </label>
                         </div>
                         <div class="cadastroEntradaDeDados">
-                            <input type="email" name="txtEmail" value="">
+                            <input type="email" name="txtEmail" value="<?=$email?>">
                         </div>
                     </div>
                     <div class="campos">
@@ -55,7 +80,7 @@
                             <label> Observações: </label>
                         </div>
                         <div class="cadastroEntradaDeDados">
-                            <textarea name="txtObs" cols="50" rows="7"></textarea>
+                            <textarea name="txtObs" cols="50" rows="7"><?=$obs?></textarea>
                         </div>
                     </div>
                     <div class="enviar">
@@ -96,9 +121,12 @@
                     <td class="tblColunas registros"><?= $dados['email']?></td>
                    
                     <td class="tblColunas registros">
-                        <img src="img/edit.png" alt="Editar" title="Editar" class="editar">
-                        <!-- href que direciona a página para este determinado caminho -->
-                        <a href="router.php?component=contatos&action=deletar&id=<?=$dados['id']?>">
+                        <a href="router.php?component=contatos&action=buscar&id=<?=$dados['id']?>">
+                            <img src="img/edit.png" alt="Editar" title="Editar" class="editar">
+                        </a>
+                        <!-- href que direciona a página para este determinado caminho. onclick para adicionar js diretamente no html; confirm para uma mensagem 
+                        sim/não; return é como uma espera pela resposta do confirm, se é true ou false -->
+                        <a onclick="return confirm('Deseja mesmo exluir o contato <?=$dados['nome']?>?');" href="router.php?component=contatos&action=deletar&id=<?=$dados['id']?>">
                             <img src="img/trash.png" alt="Excluir" title="Excluir" class="excluir">
                         </a>
                         <img src="img/search.png" alt="Visualizar" title="Visualizar" class="pesquisar">

@@ -1,5 +1,5 @@
 <!-- Objetivo: arquivo responsável pela manipulação de dados de contatos. Este arquivo fará a ponte entre a view e a model; 
-    autora: Carolina Silva; data de criação: 04/03/2022; última modificação: 25/03/2022; versão: 1.0 
+    autora: Carolina Silva; data de criação: 04/03/2022; última modificação: 01/04/2022; versão: 1.0 
 -->
 
 <?php
@@ -35,6 +35,26 @@
         }
     }
 
+    //função que procurará no banco o contato que deverá ser editado
+    function buscarContato($id) {
+        if ($id != 0 && !empty($id) && is_numeric($id)) {
+            require_once('model/bd/contato.php');
+
+            //solicitando a função da model(contato.php) que vai buscar os dados no banco
+            $dados = selectByIdContato($id);
+
+            //validando se existem dados a serem devolvidos
+            if (!empty($dados)) {
+                return $dados;
+            } else {
+                return false;
+            }
+        } else {
+            return array('idErro'  => 4,
+                         'message' => 'Não foi possível buscar registro. ID inválido.');
+        }
+    }
+
     //função para receber os dados da view e encaminhar para a model (atualizar)
     function atualizarContato() {
 
@@ -58,8 +78,6 @@
             return array('idErro'  => 4,
                          'message' => 'Não foi possível excluir registro. ID inválido ou não inserido.');
         }
-
-
     }
 
     //função para solicitar os dados da model e encaminhar a lista de contatos para a view (inserir)
