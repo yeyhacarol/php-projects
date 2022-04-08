@@ -83,12 +83,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' || $_SERVER['REQUEST_METHOD'] == 'GET')
                 //caso queiramos chamar a index e realmente trocar de tela, utilizamos:
                 // header('location: index.php');
 
+            } elseif ($action == 'EDITAR') {
+                /* resgatando o id encaminhado pelo action do form pela url */
+                $idContato = $_GET['id'];
+
+                $promessa = atualizarContato($_POST, $idContato);
+                /*verificando o tipo de dado retornado. se for um booleano, verificará se é verdadeiro e emitirá uma mensagem de sucesso,
+                  caso contrário, verificará se é um array nesse caso emitirá uma mensagem de erro */
+                if(is_bool($promessa)) {
+                    if($promessa) {
+                        echo("<script>
+                            alert('Registro atualizado com sucesso!') 
+                            window.location.href = 'index.php'; 
+                        </script>");
+                    }  
+                } elseif (is_array($promessa)) {
+                    echo("<script>
+                            alert('".$promessa['message']."') 
+                            window.history.back(); 
+                        </script>");
+                }
             }
 
             break;
     }
 }
-
-
 
 ?>

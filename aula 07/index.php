@@ -1,8 +1,11 @@
 <?php
+/* criando variável que armazena o caminho padrão na primeira vez que entrarmos no site. onde diferenciamos
+ qual a action que deve ser executada e enviada para router */
+$form = (string) "router.php?component=contatos&action=inserir";
 
 //inicializando as variáveis como nulas para não aparecer o erro nos campos
-$nome = null;
-$telefone = null;
+/* $nome está tendo seu erro omitido com @ no html */
+/* $telefone esá sendo verificado com if ternário no html*/
 $celular = null;
 $email = null;
 $obs = null;
@@ -19,7 +22,15 @@ if (session_status()) {
         $celular  = $_SESSION['dadosContato']['celular'];
         $email    = $_SESSION['dadosContato']['email'];
         $obs      = $_SESSION['dadosContato']['obs'];
+
+        /* quando o botão de editar for acionado e os dados forem armazenados na session, a url será modificada do qual a action será de editar.
+         concatenando com o id para sabermos qual o contato a ser editadoS*/
+        $form = "router.php?component=contatos&action=editar&id=".$id;
+
+        /* destruindo variável da memória do servidor */
+        unset($_SESSION['dadosContato']);
     }
+
 }
 
 ?>
@@ -41,13 +52,13 @@ if (session_status()) {
             </div>
 
             <div id="cadastroInformacoes">
-                <form  action="router.php?component=contatos&action=inserir" name="frmCadastro" method="post" >
+                <form  action="<?=$form?>" name="frmCadastro" method="post" >
                     <div class="campos">
                         <div class="cadastroInformacoesPessoais">
                             <label> Nome: </label>
                         </div>
                         <div class="cadastroEntradaDeDados">
-                            <input type="text" name="txtNome" value="<?=$nome?>" placeholder="Digite seu Nome" maxlength="100">
+                            <input type="text" name="txtNome" value="<?= @$nome?>" placeholder="Digite seu Nome" maxlength="100">
                         </div>
                     </div>           
                     <div class="campos">
@@ -55,7 +66,7 @@ if (session_status()) {
                             <label> Telefone: </label>
                         </div>
                         <div class="cadastroEntradaDeDados">
-                            <input type="tel" name="txtTelefone" value="<?=$telefone?>">
+                            <input type="tel" name="txtTelefone" value="<?= isset($telefone) ? $telefone : null?>">
                         </div>
                     </div>
                     <div class="campos">

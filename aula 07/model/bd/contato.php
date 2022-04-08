@@ -8,7 +8,8 @@
 require_once('conexaoMySql.php');
 
 //função para inserção no banco de dados
-function insertContato($dadosContato) {
+function insertContato($dadosContato)
+{
     //variável para ser utilizada no return da função. dessa maneira conseguiremos eliminar os else's da função, pois ela sempre será false a não ser que seja true
     $statusResposta = (bool) false;
 
@@ -50,7 +51,8 @@ function insertContato($dadosContato) {
 }
 
 //função para excluir no banco de dados
-function deleteContato($id) {
+function deleteContato($id)
+{
     //variável para armazenar o status da conexão, se houve affected_rows ou não(false)!
     $statusResposta = (bool) false;
 
@@ -73,7 +75,8 @@ function deleteContato($id) {
 }
 
 //função para buscar contato no banco de dados através do id
-function selectByIdContato($id) {
+function selectByIdContato($id)
+{
     //abrindo conexão com o banco de dados
     $conexao = conexaoMySql();
 
@@ -104,11 +107,46 @@ function selectByIdContato($id) {
 }
 
 //função para atualizar no banco de dados
-function updateContato() {
+function updateContato($dadosContato)
+{
+    //variável para ser utilizada no return da função. dessa maneira conseguiremos eliminar os else's da função, pois ela sempre será false a não ser que seja true
+    $statusResposta = (bool) false;
+
+    //abrir a conexão com o banco de dados, só assim poderemos fazer a inserção
+    $conexao = conexaoMySql();
+
+    //variável para armazenar o script do banco
+    $sql = "update tblcontatos set
+                nome     = '" . $dadosContato['nome'] . "',
+                telefone = '" . $dadosContato['telefone'] . "',
+                celular  = '" . $dadosContato['celular'] . "',
+                email    = '" . $dadosContato['email'] . "',
+                obs      = '" . $dadosContato['obs'] . "'
+
+            where idcontato = ".$dadosContato['id'];
+           
+    //executar o script no banco. _query é a função para encaminhar o script para o banco que retorna um booleano
+    //primeira validação para sabermos se o script sql está correto ou não
+    if (mysqli_query($conexao, $sql)) {
+        //validando se houve alguma modificação; linha acrescentada no banco de dados
+        if (mysqli_affected_rows($conexao)) {
+            $statusResposta = true;
+        } /* eis os else's que podem ser eliminados com a declaração daquela variável:
+                 else {
+                     $statusResposta = false;
+                 }
+             } else {
+                 $statusResposta = false; 
+             } */
+    }
+
+    fecharConexaoMySql($conexao);
+    return $statusResposta;
 }
 
 //função para listar todos os contatos do banco de dados
-function selectAllContatos() {
+function selectAllContatos()
+{
     //abrindo conexão com o banco
     $conexao = conexaoMySql();
 
