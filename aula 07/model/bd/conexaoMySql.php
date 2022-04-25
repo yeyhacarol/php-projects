@@ -32,7 +32,7 @@ function conexaoMySql() {
 }
 
 // fechar conexão com o banco de dados MySql, passando a $conexao como argumento/parâmetro, variável existente nos outros arquivos responsável por representar o banco
-function fecharConexaoMySql($conexao)  {
+function   fecharConexaoMySql($conexao)  {
     mysqli_close($conexao);
 }
 

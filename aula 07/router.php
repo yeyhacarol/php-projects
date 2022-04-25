@@ -22,8 +22,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' || $_SERVER['REQUEST_METHOD'] == 'GET')
 
             //verificando o tipo de ação requerida
             if ($action == 'INSERIR') {
-                //chamar a função de inserir da controller
-                $promessa = inserirContato($_POST);
+
+                if (isset($_FILES) && !empty($_FILES)) {
+                    //chamar a função de inserir da controller
+                    $promessa = inserirContato($_POST, $_FILES);
+                } else {
+                    $promessa = inserirContato($_POST, null);
+                }
                 /*verificando o tipo de dado retornado. se for um booleano, verificará se é verdadeiro e emitirá uma mensagem de sucesso,
                   caso contrário, verificará se é um array nesse caso emitirá uma mensagem de erro */
                 if(is_bool($promessa)) {
