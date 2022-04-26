@@ -22,14 +22,16 @@ function insertContato($dadosContato)
                   telefone,
                   celular,
                   email,
-                  obs)
+                  obs,
+                  foto)
                   
                 values
                  ('" . $dadosContato['nome'] . "',
                   '" . $dadosContato['telefone'] . "',
                   '" . $dadosContato['celular'] . "',
                   '" . $dadosContato['email'] . "',
-                  '" . $dadosContato['obs'] . "');";
+                  '" . $dadosContato['obs'] . "',
+                  '" . $dadosContato['foto'] ."');";
 
     //executar o script no banco. _query é a função para encaminhar o script para o banco que retorna um booleano
     //primeira validação para sabermos se o script sql está correto ou não
@@ -170,7 +172,8 @@ function selectAllContatos()
                 "telefone" => $resultDados['telefone'],
                 "celular"  => $resultDados['celular'],
                 "email"    => $resultDados['email'],
-                "obs"      => $resultDados['obs']
+                "obs"      => $resultDados['obs'],
+                "foto"     => $resultDados['foto']
             );
 
             $cont++;

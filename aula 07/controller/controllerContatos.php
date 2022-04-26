@@ -5,18 +5,28 @@
 <?php
     //função para receber os dados da view e encaminhar para a model (inserir)
     function inserirContato($dadosContato, $file) {
+        /* declarando variável e iniciando como nula para o caso de não haver upload */
+        $nomeFoto = (string) null;
+
         //verificando se o objeto $dadosContato não está vazio
         if (!empty($dadosContato)) {
             //validando se as caixas de texto de nome e celular não estão vazias, pois o preenchimento é obrigatório no banco de dados
             if (!empty($dadosContato['txtNome']) && !empty($dadosContato['txtCelular']) && !empty($dadosContato['txtEmail'])) {
 
+                /* validando se chegou algum arquivo para upload */
                 if ($file != null) {
+                    /* import do arquivo que contém a função de upload */
                     require_once('modulo/upload.php');
 
-                    $resultado = uploadFile($file['fleFoto']);
-                   
+                    /* chamando a função de upload */
+                    $nomeFoto = uploadFile($file['fleFoto']);
 
-                    die($resultado);
+                    /* verificando se tudo ocorreu como esperado ou não */
+                    if (is_array($nomeFoto)) {
+                        /* no caso de erros no processo de upload, a função retornará um array com a mensagem de erro. tal array será retornado para a router e ela exibirá a mensagem para o usuário */
+                        return $nomeFoto;
+                    } 
+                                      
                 }
 
                 /*criação do array que contém dados que serão encaminhados para a model para inserção deles no bd.
@@ -26,7 +36,8 @@
                     "telefone" => $dadosContato['txtTelefone'],
                     "celular"  => $dadosContato['txtCelular'],
                     "email"    => $dadosContato['txtEmail'],
-                    "obs"      => $dadosContato['txtObs']
+                    "obs"      => $dadosContato['txtObs'],
+                    "foto"     => $nomeFoto
                 );
     
                 //importar arquivo de manipulação de dados do bd
@@ -80,7 +91,8 @@
                         "telefone" => $dadosContato['txtTelefone'],
                         "celular"  => $dadosContato['txtCelular'],
                         "email"    => $dadosContato['txtEmail'],
-                        "obs"      => $dadosContato['txtObs']
+                        "obs"      => $dadosContato['txtObs'],
+                        "foto"     => $dadosContato['foto']
                     );
         
                     //importar arquivo de manipulação de dados do bd

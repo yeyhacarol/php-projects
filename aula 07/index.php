@@ -124,6 +124,7 @@ if (session_status()) {
                     <td class="tblColunas destaque"> Celular </td>
                     <td class="tblColunas destaque"> Email </td>
                     <td class="tblColunas destaque"> Opções </td>
+                    <td class="tblColunas destaque"> Foto </td>
                 </tr>
                 
                 <?php
@@ -139,6 +140,7 @@ if (session_status()) {
                     <td class="tblColunas registros"><?= $dados['nome']?></td>
                     <td class="tblColunas registros"><?= $dados['celular']?></td>
                     <td class="tblColunas registros"><?= $dados['email']?></td>
+                    <td class="tblColunas registros"><img src="arquivos/<?= $dados['foto']?>" class="foto" alt=""></td>
                    
                     <td class="tblColunas registros">
                         <a href="router.php?component=contatos&action=buscar&id=<?=$dados['id']?>">
