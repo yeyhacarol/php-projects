@@ -1,5 +1,5 @@
 <!-- Objetivo: arquivo de rota genérico para receber todas as requisições da view(dados de um form, listagem de dados, ação de excluir ou atualizar) 
-        e enviar/receber para(da) a controller; autora: Carolina Silva; data criação: 04/03/2022; última modificação: 01/04/2022; versão: 1.0 
+        e enviar/receber para(da) a controller; autora: Carolina Silva; data criação: 04/03/2022; última modificação: 26/04/2022; versão: 1.0 
 -->
 
 <?php
@@ -47,9 +47,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' || $_SERVER['REQUEST_METHOD'] == 'GET')
             } elseif ($action == 'DELETAR') {
                 //recebendo via get(url) o id do registro que deve ser excluído, atráves do link da imagem que foi acionado na index
                 $idContato = $_GET['id'];
+                $foto = $_GET['foto'];
+
+                /* criando array para encaminhar os valores e da foto juntos para a controller, dessa maneira não precisamos ajustar as características da função */
+                $arrayDados = array(
+                    "id"   => $idContato,
+                    "foto" => $foto
+                );
                 
                 //chamando acão de deletar da controller
-                $promessa = deletarContato($idContato);
+                $promessa = deletarContato($arrayDados);
 
                 if(is_bool($promessa)) {
 
@@ -89,10 +96,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' || $_SERVER['REQUEST_METHOD'] == 'GET')
                 // header('location: index.php');
 
             } elseif ($action == 'EDITAR') {
-                /* resgatando o id encaminhado pelo action do form pela url */
+                /* resgatando o id e a foto e encaminhado pelo action do form através da url */
                 $idContato = $_GET['id'];
+                $foto = $_GET['foto'];
 
-                $promessa = atualizarContato($_POST, $idContato);
+                /* criando array com ambos os dados para podermos mandar como parâmetro da função, sem precisarmos alterá-la colocando 3 parâmetros */
+                $arrayDados = array(
+                    "id"   => $idContato,
+                    "foto" => $foto,
+                    "file" => $_FILES 
+                );
+
+                $promessa = atualizarContato($_POST, $arrayDados);
                 /*verificando o tipo de dado retornado. se for um booleano, verificará se é verdadeiro e emitirá uma mensagem de sucesso,
                   caso contrário, verificará se é um array nesse caso emitirá uma mensagem de erro */
                 if(is_bool($promessa)) {

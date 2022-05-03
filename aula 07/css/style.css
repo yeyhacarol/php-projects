@@ -219,6 +219,12 @@ input[type=email]:hover{
     font-weight: bold;
 }
 
+.campos img {
+    height: 150px;
+    width: 200px;
+    padding: 30px;
+}
+
 /*Modal*/
 #containerModal{
     width: 100%;

@@ -1,6 +1,6 @@
 <!-- 
     Objetivo: arquivo responsável pela manipulação dos dados dentro do banco de dados; autora; Carolina Silva; data de crição: 11/03/2022; 
-    última modificação: 01/04/2022; versão: 1.0 
+    última modificação: 26/04/2022; versão: 1.0 
 -->
 
 <?php
@@ -97,7 +97,8 @@ function selectByIdContato($id)
                 "telefone" => $resultDados['telefone'],
                 "celular"  => $resultDados['celular'],
                 "email"    => $resultDados['email'],
-                "obs"      => $resultDados['obs']
+                "obs"      => $resultDados['obs'],
+                "foto"     => $resultDados['foto']
             );
         }
 
@@ -123,7 +124,8 @@ function updateContato($dadosContato)
                 telefone = '" . $dadosContato['telefone'] . "',
                 celular  = '" . $dadosContato['celular'] . "',
                 email    = '" . $dadosContato['email'] . "',
-                obs      = '" . $dadosContato['obs'] . "'
+                obs      = '" . $dadosContato['obs'] . "',
+                foto     = '" . $dadosContato['foto'] . "'
 
             where idcontato = ".$dadosContato['id'];
            

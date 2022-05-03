@@ -1,8 +1,13 @@
 <?php
+/* import do arquivo de configurações do projeto */
+require_once('modulo/config.php');
+
 /* criando variável que armazena o caminho padrão na primeira vez que entrarmos no site. onde diferenciamos
  qual a action que deve ser executada e enviada para router */
 $form = (string) "router.php?component=contatos&action=inserir";
 
+/* variavél para carregar o nom da foto do banco de dados */
+$foto = (string) null;
 //inicializando as variáveis como nulas para não aparecer o erro nos campos
 /* $nome está tendo seu erro omitido com @ no html */
 /* $telefone esá sendo verificado com if ternário no html*/
@@ -22,10 +27,11 @@ if (session_status()) {
         $celular  = $_SESSION['dadosContato']['celular'];
         $email    = $_SESSION['dadosContato']['email'];
         $obs      = $_SESSION['dadosContato']['obs'];
+        $foto     = $_SESSION['dadosContato']['foto'];
 
         /* quando o botão de editar for acionado e os dados forem armazenados na session, a url será modificada do qual a action será de editar.
          concatenando com o id para sabermos qual o contato a ser editadoS*/
-        $form = "router.php?component=contatos&action=editar&id=".$id;
+        $form = "router.php?component=contatos&action=editar&id=".$id."&foto".$foto;
 
         /* destruindo variável da memória do servidor */
         unset($_SESSION['dadosContato']);
@@ -103,6 +109,11 @@ if (session_status()) {
                             <textarea name="txtObs" cols="50" rows="7"><?=$obs?></textarea>
                         </div>
                     </div>
+                    <div class="campos">
+                        <img src="<?=FILE_DIRECTORY_UPLOAD.$foto?>">
+                    </div>
+
+
                     <div class="enviar">
                         <div class="enviar">
                             <input type="submit" name="btnEnviar" value="Salvar">
@@ -134,13 +145,15 @@ if (session_status()) {
                     $listContato = listarContato();
                     //foreach para percorrermos e printarmos os dados de contato um a um
                     foreach($listContato as $dados) {
+                        /* igualando variável com o valor que vem do banco de dados, ou seja, o nome da foto */
+                        $foto = $dados['foto']
                 ?>
                
                 <tr id="tblLinhas">
                     <td class="tblColunas registros"><?= $dados['nome']?></td>
                     <td class="tblColunas registros"><?= $dados['celular']?></td>
                     <td class="tblColunas registros"><?= $dados['email']?></td>
-                    <td class="tblColunas registros"><img src="arquivos/<?= $dados['foto']?>" class="foto" alt=""></td>
+                    <td class="tblColunas registros"><img src="<?=FILE_DIRECTORY_UPLOAD.$foto?>" class="foto" alt=""></td>
                    
                     <td class="tblColunas registros">
                         <a href="router.php?component=contatos&action=buscar&id=<?=$dados['id']?>">
@@ -148,7 +161,7 @@ if (session_status()) {
                         </a>
                         <!-- href que direciona a página para este determinado caminho. onclick para adicionar js diretamente no html; confirm para uma mensagem 
                         sim/não; return é como uma espera pela resposta do confirm, se é true ou false -->
-                        <a onclick="return confirm('Deseja mesmo exluir o contato <?=$dados['nome']?>?');" href="router.php?component=contatos&action=deletar&id=<?=$dados['id']?>">
+                        <a onclick="return confirm('Deseja mesmo exluir o contato <?=$dados['nome']?>?');" href="router.php?component=contatos&action=deletar&id=<?=$dados['id']?>&foto=<?=$foto?>">
                             <img src="img/trash.png" alt="Excluir" title="Excluir" class="excluir">
                         </a>
                         <img src="img/search.png" alt="Visualizar" title="Visualizar" class="pesquisar">
