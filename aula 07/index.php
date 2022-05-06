@@ -29,9 +29,11 @@ if (session_status()) {
         $obs      = $_SESSION['dadosContato']['obs'];
         $foto     = $_SESSION['dadosContato']['foto'];
 
+        
+
         /* quando o botão de editar for acionado e os dados forem armazenados na session, a url será modificada do qual a action será de editar.
          concatenando com o id para sabermos qual o contato a ser editadoS*/
-        $form = "router.php?component=contatos&action=editar&id=".$id."&foto".$foto;
+        $form = "router.php?component=contatos&action=editar&id=".$id."&foto=".$foto;
 
         /* destruindo variável da memória do servidor */
         unset($_SESSION['dadosContato']);
@@ -146,7 +148,8 @@ if (session_status()) {
                     //foreach para percorrermos e printarmos os dados de contato um a um
                     foreach($listContato as $dados) {
                         /* igualando variável com o valor que vem do banco de dados, ou seja, o nome da foto */
-                        $foto = $dados['foto']
+                        $foto = $dados['foto'];
+
                 ?>
                
                 <tr id="tblLinhas">

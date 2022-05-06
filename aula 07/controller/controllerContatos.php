@@ -79,11 +79,15 @@
 
     //função para receber os dados da view e encaminhar para a model (atualizar)
     function atualizarContato($dadosContato, $arrayDados) {
+        
+
+        $novoUpload = (bool) false;
         /* recebe id, a foto(nome da foto que já existe) enviada pelo arrayDados */
         $id = $arrayDados['id'];
         $foto = $arrayDados['foto'];
         //objeto de array referente a nova foto que poderá ser enviada ao servidor
         $file = $arrayDados['file'];
+
 
         if (!empty($dadosContato)) {
             //validando se as caixas de texto de nome e celular não estão vazias, pois o preenchimento é obrigatório no banco de dados
@@ -92,6 +96,7 @@
                 if($id != 0 && !empty($id) && is_numeric($id)) {
                     /* verificando se o arquivo existe. verifica se será enviada uma nova foto ao servidor */
                     if ($file['fleFoto']['name'] != null) {
+                        $novoUpload = true;
                         /* import do arquivo que contém a função de upload */
                         require_once('modulo/upload.php');
                         /* chamando a função para atualizar o arquivo que recebe como parâmetro o arquivo */
@@ -100,7 +105,6 @@
                         /* permanece a mesmo foto no banco de dados */
                         $novaFoto = $foto;
                     }
-
 
                     /*criação do array que contém dados que serão encaminhados para a model para inserção deles no bd.
                      é importante criar o array conforme as necessidades do bd e de acordo com a nomenclatura utilizada nele*/
@@ -116,10 +120,13 @@
         
                     //importar arquivo de manipulação de dados do bd
                     require_once('model/bd/contato.php');
+                    require_once('modulo/config.php');
                     
                     //função presente na model
                     if(updateContato($arrayDados)) {
-                        unlink(FILE_DIRECTORY_UPLOAD.$foto);
+                        if ($novoUpload) {
+                            unlink(FILE_DIRECTORY_UPLOAD.$foto);
+                        }
                         return true;
                     } else {
                         return array('idErro'  => 1,
