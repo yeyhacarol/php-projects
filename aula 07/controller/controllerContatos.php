@@ -10,8 +10,8 @@
 
         //verificando se o objeto $dadosContato não está vazio
         if (!empty($dadosContato)) {
-            //validando se as caixas de texto de nome e celular não estão vazias, pois o preenchimento é obrigatório no banco de dados
-            if (!empty($dadosContato['txtNome']) && !empty($dadosContato['txtCelular']) && !empty($dadosContato['txtEmail'])) {
+            //validando se as caixas de texto de nome, celular email e estado não estão vazias, pois o preenchimento é obrigatório no banco de dados
+            if (!empty($dadosContato['txtNome']) && !empty($dadosContato['txtCelular']) && !empty($dadosContato['txtEmail']) && !empty($dadosContato['sltEstado'])) {
  
                 /* validando se chegou algum arquivo para upload */
                 if ($file['fleFoto']['name'] != null) {
@@ -38,7 +38,8 @@
                     "celular"  => $dadosContato['txtCelular'],
                     "email"    => $dadosContato['txtEmail'],
                     "obs"      => $dadosContato['txtObs'],
-                    "foto"     => $nomeFoto
+                    "foto"     => $nomeFoto,
+                    "idEstado"   => $dadosContato['sltEstado']
                 );
     
                 //importar arquivo de manipulação de dados do bd
@@ -79,15 +80,12 @@
 
     //função para receber os dados da view e encaminhar para a model (atualizar)
     function atualizarContato($dadosContato, $arrayDados) {
-        
-
-        $novoUpload = (bool) false;
+        $statusUpload = (bool) false;
         /* recebe id, a foto(nome da foto que já existe) enviada pelo arrayDados */
         $id = $arrayDados['id'];
         $foto = $arrayDados['foto'];
         //objeto de array referente a nova foto que poderá ser enviada ao servidor
         $file = $arrayDados['file'];
-
 
         if (!empty($dadosContato)) {
             //validando se as caixas de texto de nome e celular não estão vazias, pois o preenchimento é obrigatório no banco de dados
@@ -96,11 +94,12 @@
                 if($id != 0 && !empty($id) && is_numeric($id)) {
                     /* verificando se o arquivo existe. verifica se será enviada uma nova foto ao servidor */
                     if ($file['fleFoto']['name'] != null) {
-                        $novoUpload = true;
                         /* import do arquivo que contém a função de upload */
                         require_once('modulo/upload.php');
                         /* chamando a função para atualizar o arquivo que recebe como parâmetro o arquivo */
                         $novaFoto = uploadFile($file['fleFoto']);
+
+                        $statusUpload = true;
                     } else {
                         /* permanece a mesmo foto no banco de dados */
                         $novaFoto = $foto;
@@ -115,16 +114,19 @@
                         "celular"  => $dadosContato['txtCelular'],
                         "email"    => $dadosContato['txtEmail'],
                         "obs"      => $dadosContato['txtObs'],
-                        "foto"     => $novaFoto
+                        "foto"     => $novaFoto,
+                        "idEstado" => $dadosContato['sltEstado']
                     );
         
-                    //importar arquivo de manipulação de dados do bd
+                    //importar arquivo de manipulação de dados do bd; import do arquivo de configuração 
                     require_once('model/bd/contato.php');
                     require_once('modulo/config.php');
                     
                     //função presente na model
                     if(updateContato($arrayDados)) {
-                        if ($novoUpload) {
+                        //validando se será necessário apagar a foto antiga. ativada em true na linha 101, quando realizamos o upload de uma nova foto para o servidor
+                        if ($statusUpload) {
+                            //apaga a foto antiga do servidor
                             unlink(FILE_DIRECTORY_UPLOAD.$foto);
                         }
                         return true;

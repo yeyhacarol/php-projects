@@ -23,7 +23,8 @@ function insertContato($dadosContato)
                   celular,
                   email,
                   obs,
-                  foto)
+                  foto,
+                  idEstado)
                   
                 values
                  ('" . $dadosContato['nome'] . "',
@@ -31,7 +32,8 @@ function insertContato($dadosContato)
                   '" . $dadosContato['celular'] . "',
                   '" . $dadosContato['email'] . "',
                   '" . $dadosContato['obs'] . "',
-                  '" . $dadosContato['foto'] ."');";
+                  '" . $dadosContato['foto'] ."',
+                  '" . $dadosContato['idEstado'] . "');";
 
     //executar o script no banco. _query é a função para encaminhar o script para o banco que retorna um booleano
     //primeira validação para sabermos se o script sql está correto ou não
@@ -98,7 +100,8 @@ function selectByIdContato($id)
                 "celular"  => $resultDados['celular'],
                 "email"    => $resultDados['email'],
                 "obs"      => $resultDados['obs'],
-                "foto"     => $resultDados['foto']
+                "foto"     => $resultDados['foto'],
+                "idEstado" => $resultDados['idEstado']
             );
         }
 
@@ -125,7 +128,8 @@ function updateContato($dadosContato)
                 celular  = '" . $dadosContato['celular'] . "',
                 email    = '" . $dadosContato['email'] . "',
                 obs      = '" . $dadosContato['obs'] . "',
-                foto     = '" . $dadosContato['foto'] . "'
+                foto     = '" . $dadosContato['foto'] . "',
+                idEstado = '" . $dadosContato['idEstado'] . "'
 
             where idcontato = ".$dadosContato['id'];
            
@@ -150,7 +154,7 @@ function updateContato($dadosContato)
 
 //função para listar todos os contatos do banco de dados
 function selectAllContatos()
-{
+{   
     //abrindo conexão com o banco
     $conexao = conexaoMySql();
 
@@ -175,7 +179,8 @@ function selectAllContatos()
                 "celular"  => $resultDados['celular'],
                 "email"    => $resultDados['email'],
                 "obs"      => $resultDados['obs'],
-                "foto"     => $resultDados['foto']
+                "foto"     => $resultDados['foto'],
+                "idEstado" => $resultDados['idEstado']
             );
 
             $cont++;
@@ -184,7 +189,11 @@ function selectAllContatos()
         //função para fechar a conexão informando qual é o banco, nesse caso armazenado na variável $conexao
         fecharConexaoMySql($conexao);
 
-        return $arrayDados;
+        if (isset($arrayDados)) {
+            return $arrayDados;
+        } else {
+            return false;
+        }
     }
 }
 ?>

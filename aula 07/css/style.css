@@ -101,7 +101,6 @@ input[type=email]:hover{
     height: 50px;
     background-color: dodgerblue;
     color: white;
-    margin-top: 30px;
     font-size: 1.2em;
 }
 
@@ -222,7 +221,7 @@ input[type=email]:hover{
 .campos img {
     height: 150px;
     width: 200px;
-    padding: 30px;
+    padding: 5px 20px;
 }
 
 /*Modal*/
