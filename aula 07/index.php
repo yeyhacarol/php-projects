@@ -79,7 +79,7 @@ if (session_status()) {
                     </div>
                     <div class="cadastroEntradaDeDados">
                         <select name="sltEstado">
-                            <option value="">Selecione um item</option>
+                            <option value="">Selecione um estado</option>
                             <?php
                             require_once('controller/controllerEstados.php');
 
